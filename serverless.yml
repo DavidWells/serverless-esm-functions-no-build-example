@@ -1,0 +1,16 @@
+service: my-esm-service
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+package:
+  patterns:
+    - '!.git/**'
+    - '!.gitignore'
+    - '!.DS_Store'
+    - '!README.md'
+
+functions:
+  hello:
+    handler: handler.handler

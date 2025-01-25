@@ -1,0 +1,14 @@
+{
+  "name": "my-esm-service",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18.x"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "serverless": "^3.34.0"
+  }
+} 
