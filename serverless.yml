@@ -2,15 +2,15 @@ service: my-esm-service
 
 provider:
   name: aws
-  runtime: nodejs18.x
-
-package:
-  patterns:
-    - '!.git/**'
-    - '!.gitignore'
-    - '!.DS_Store'
-    - '!README.md'
+  runtime: nodejs22.x
 
 functions:
   hello:
-    handler: handler.handler
+    handler: my-function.handler
+
+# Optionally, you can exclude files from the packaged zip
+package:
+  patterns:
+    - '!.gitignore'
+    - '!.DS_Store'
+    - '!README.md'

@@ -1,6 +1,5 @@
 # Serverless directories
 .serverless/
-.esbuild/
 
 # Dependencies
 node_modules/

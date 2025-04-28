@@ -1,9 +1,9 @@
-import { capitalize, reverse } from 'lodash-es';
+import { capitalize, reverse } from 'lodash-es'
 
 export const handler = async (event) => {
-  const message = 'hello world';
-  const processedMessage = capitalize(message);
-  const reversedMessage = reverse(message.split('')).join('');
+  const message = 'hello world'
+  const processedMessage = capitalize(message)
+  const reversedMessage = reverse(message.split('')).join('')
   
   return {
     statusCode: 200,
@@ -12,5 +12,5 @@ export const handler = async (event) => {
       capitalized: processedMessage,
       reversed: reversedMessage
     })
-  };
-}; 
+  }
+}

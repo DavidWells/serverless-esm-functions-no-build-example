@@ -2,22 +2,97 @@
 
 This is a simple example demonstrating how to use ES Modules (ESM) with the Serverless Framework without requiring a build step.
 
+<!-- doc-gen {TOC} -->
+- [Why no bundle?](#why-no-bundle)
+- [How it works](#how-it-works)
+- [Our lambda code](#our-lambda-code)
+- [Our config](#our-config)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+<!-- end-doc-gen -->
+
+## Why no bundle?
+
+1. Bundling can mess with logging unless you setup sourcemaps.
+2. It's super simple
+3. You can read un-minified/compiled code in AWS console if you need to.
+
+## How it works
+
+You simply need to set `"type": "module"` in your package.json
+
+Then the `serverless` framework will package and deploy your unbundled ESM lambda function
+
+This example repo demonstrates how to uses `lodash-es` as a direct dependency
+
+## Our lambda code
+
+This is our lambda handler.
+
+<!-- doc-gen {CODE} src="./my-function.js" -->
+```js
+import { capitalize, reverse } from 'lodash-es'
+
+export const handler = async (event) => {
+  const message = 'hello world'
+  const processedMessage = capitalize(message)
+  const reversedMessage = reverse(message.split('')).join('')
+  
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      original: message,
+      capitalized: processedMessage,
+      reversed: reversedMessage
+    })
+  }
+}
+```
+<!-- end-doc-gen -->
+
+## Our config
+
+Below is a simple `serverless.yml` file with our `runtime` defined and a pointer to where our code lives.
+
+<!-- doc-gen {CODE} src="./serverless.yml"-->
+```yml
+service: my-esm-service
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+
+functions:
+  hello:
+    handler: my-function.handler
+
+# Optionally, you can exclude files from the packaged zip
+package:
+  patterns:
+    - '!.gitignore'
+    - '!.DS_Store'
+    - '!README.md'
+```
+<!-- end-doc-gen -->
+
 ## Features
 
-- Native ES Module support using Node.js 18.x
+- Native ES Module support using Node.js 22.x
 - Uses `lodash-es` as an ESM-compatible dependency
 - No bundling or transpilation required
 - Simple Lambda function that processes text
 
 ## Prerequisites
 
-- Node.js 18.x or later
-- Serverless Framework CLI installed (`npm install -g serverless`)
+- Node.js 22.x or later
+- Serverless Framework CLI installed (`npm install -g serverless`) or open serverless
 - AWS credentials configured
 
 ## Installation
 
-1. Clone this repository
+1. Clone the repository
 2. Install dependencies:
 
 ```bash
@@ -38,8 +113,8 @@ serverless deploy
 serverless invoke --function hello
 ```
 
-## Notes
+3. Teardown
 
-- The function is deployed as an ESM-compatible Lambda function
-- The `lodash-es` package is installed and used directly in the function
-- No build step is required, and the function can be deployed directly
+```bash
+severless remove
+```
