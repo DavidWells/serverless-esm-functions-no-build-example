@@ -29,7 +29,7 @@ This example repo demonstrates how to uses `lodash-es` as a direct dependency
 
 ## Our lambda code
 
-This is our lambda handler.
+This is our [lambda handler](https://github.com/DavidWells/serverless-esm-functions-no-build-example/blob/main/my-function.js).
 
 <!-- doc-gen {CODE} src="./my-function.js" -->
 ```js
@@ -54,7 +54,7 @@ export const handler = async (event) => {
 
 ## Our config
 
-Below is a simple `serverless.yml` file with our `runtime` defined and a pointer to where our code lives.
+Below is a simple `serverless.yml` file with our `runtime` defined and a pointer to where our code lives in [./my-function.js](https://github.com/DavidWells/serverless-esm-functions-no-build-example/blob/main/my-function.js).
 
 <!-- doc-gen {CODE} src="./serverless.yml"-->
 ```yml
@@ -87,7 +87,7 @@ package:
 ## Prerequisites
 
 - Node.js 22.x or later
-- Serverless Framework CLI installed (`npm install -g serverless`) or open serverless
+- Serverless Framework CLI installed (`npm install -g serverless`) or open serverless (`npm install -g oss-serverless`)
 - AWS credentials configured
 
 ## Installation
